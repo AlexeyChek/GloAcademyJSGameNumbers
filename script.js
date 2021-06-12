@@ -29,6 +29,17 @@ function start() {
 
     let play = (number)=> {
       if (!doGame) return;
+
+      if (count <= 0) {
+        let letsGo = confirm('Попытки закончились ,хотите сыграть ещё?');
+        if (letsGo) {
+          start();
+          return;
+        } else {
+          return;
+        }
+      }
+
       let num = getNumber(number);
       // console.log(num);
       if (isNumber(num)) {
@@ -44,26 +55,21 @@ function start() {
           count--;
         }
       }
-      if (num === null) doGame = false;
+      if (num === null) {
+        doGame = false;
+        moreGame = false;
+      }
       play(num);
     };
-    play(0);
+    play();
 
     if (!doGame && !moreGame) {
       alert('Игра окончена');
       return;
     }    
-    if (count <= 0) {
-      let letsGo = confirm('Попытки закончились ,хотите сыграть ещё?');
-      if (letsGo) {
-        start();
-        return;
-      } else {
-        return;
-      }
-    }
 
-    game(true);
+
+    // game(true);
   };
 
   game(true);
